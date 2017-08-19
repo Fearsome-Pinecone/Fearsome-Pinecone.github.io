@@ -1,13 +1,13 @@
 // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDAOmW37qUJ7XSSpvRmpco54lfB6CTT06U",
-    authDomain: "collaborative-sketch-c4560.firebaseapp.com",
-    databaseURL: "https://collaborative-sketch-c4560.firebaseio.com",
-    projectId: "collaborative-sketch-c4560",
-    storageBucket: "collaborative-sketch-c4560.appspot.com",
-    messagingSenderId: "1075713428520"
-  };
- 
+var config = {
+  apiKey: "AIzaSyCA7_xKMf6oNW8WpiLc77rqCfgULyIoW-I",
+  authDomain: "collaborative-sketch-a815a.firebaseapp.com",
+  databaseURL: "https://collaborative-sketch-a815a.firebaseio.com",
+  projectId: "collaborative-sketch-a815a",
+  storageBucket: "",
+  messagingSenderId: "848954033921"
+};
+
 firebase.initializeApp(config);
 
 var pointsData = firebase.database().ref();
@@ -40,4 +40,28 @@ function draw() {
 }
 
 
+function drawPoint() {
+  pointsData.push({
+    x: mouseX,
+    y: mouseY
+  });
+}
 
+function drawPointIfMousePressed() {
+  if (mouseIsPressed) {
+    drawPoint();
+  }
+}
+
+$("#saveDrawing").on("click", saveDrawing);
+
+function saveDrawing() {
+  saveCanvas();
+}
+
+$("#clearDrawing").on("click", clearDrawing);
+
+function clearDrawing() {
+  pointsData.remove();
+  points = [];
+}
